@@ -32,6 +32,7 @@ function App() {
   }
 
   const getCities = async() => {
+    console.log("getcities")
     try {
       const data = await fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`);
       const res = await data.json();
@@ -53,7 +54,7 @@ function App() {
   },[selectedCountry])
 
   useEffect( () => {
-    if(selectedCountry && selectedCity) {
+    if(selectedCountry && selectedState) {
       getCities();
     }
     
@@ -84,6 +85,11 @@ function App() {
             })}
           </select>
         </div>
+        {selectedCity && (
+          <h2>
+            You selected <span className='highlight'>{selectedCity}</span><span className='fade'>{" "} {selectedState}, {selectedCountry}</span>
+          </h2>
+        )}
     </div>
   );
 }
